@@ -33,7 +33,7 @@
   the power of using XSLT to create pretty output from XML sources.
   -->
 <xsl:template match="/pokedex">
-  <xsl:variable name="pokemonResults" select="" />
+  <xsl:variable name="pokemonResults" select="pokemon[type='fire' or type='water' or type='flying' or type='ground']" />
 
   <html>
   <body>
@@ -44,7 +44,7 @@
       <th>Name</th>
       <th>Type(s)</th>
     </tr>
-    <xsl:apply-templates select="pokemon[$pokemonResults]" />
+    <xsl:apply-templates select="$pokemonResults" />
   </table>
   </body>
   </html>

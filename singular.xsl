@@ -14,7 +14,7 @@
   then update the HTML version of these rules below (and comment these out!) to see a nicely-
   formatted HTML file.
   -->
-<xsl:template match="/pokedex">
+<!-- <xsl:template match="/pokedex">
 Single type pokemon: <xsl:value-of select="" />:
 
 <xsl:apply-templates select="" />
@@ -22,37 +22,37 @@ Single type pokemon: <xsl:value-of select="" />:
 
 <xsl:template match="pokemon">
     <xsl:value-of select="./name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:value-of select="./@classification" /> | <xsl:value-of select="./type" /> |
-</xsl:template>
+</xsl:template> -->
 
 <!--
   These rules will generate HTML output rather than text. This is to demonstrate
   the power of using XSLT to create pretty output from XML sources.
-  -->
-<!--
-<xsl:template match="/pokedex">
-  <html>
-  <body>
-  <h2>Single-type Pokemon</h2>
-  Count: <xsl:value-of select="" />
-  <table border="1">
-    <tr bgcolor="#9acd32">
-      <th>Name</th>
-      <th>Classification</th>
-      <th>Type</th>
-    </tr>
-    <xsl:apply-templates select="" />
-  </table>
-  </body>
-  </html>
-</xsl:template>
-
-<xsl:template match="pokemon">
-    <tr>
-      <td><xsl:value-of select="./name" />(<xsl:value-of select="@pokedexNumber" />)</td>
-      <td><xsl:value-of select="./@classification" /></td>
-      <td><xsl:value-of select="./type" /></td>
-    </tr>
-</xsl:template>
 -->
+
+  <xsl:template match="/pokedex">
+    <html>
+    <body>
+    <h2>Single-type Pokemon</h2>
+    Count: <xsl:value-of select="count(pokemon[type and not(type/following-sibling::type)])" />
+    <table border="1">
+      <tr bgcolor="#9acd32">
+        <th>Name</th>
+        <th>Classification</th>
+        <th>Type</th>
+      </tr>
+      <xsl:apply-templates select="pokemon[type and not(type/following-sibling::type)]" />
+    </table>
+    </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="pokemon">
+      <tr>
+        <td><xsl:value-of select="./name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+        <td><xsl:value-of select="./@classification" /></td>
+        <td><xsl:value-of select="./type" /></td>
+      </tr>
+  </xsl:template>
+
 
 </xsl:stylesheet>

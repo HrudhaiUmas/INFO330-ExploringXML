@@ -17,11 +17,11 @@
   -->
 <xsl:template match="/pokedex">
     Strong attackers:
-    <xsl:apply-templates select="pokemon[attack/text() > 150]" />
+    <xsl:apply-templates select="pokemon[attack > 150]" />
     Strong defenders:
-    <xsl:apply-templates select="pokemon[defense/text() > 150]" />
+    <xsl:apply-templates select="pokemon[defense > 150]" />
     Fast:
-    <xsl:apply-templates select="pokemon[speed/text() > 150]" />
+    <xsl:apply-templates select="pokemon[speed > 150]" />
 </xsl:template>
 
 <xsl:template match="pokemon">
@@ -32,28 +32,61 @@
   These rules will generate HTML output rather than text. This is to demonstrate
   the power of using XSLT to create pretty output from XML sources.
   -->
-<!--
-<xsl:template match="/pokedex">
-  <html>
-  <body>
-  <h2>Generation One Pokemon</h2>
-  <table border="1">
-    <tr bgcolor="#9acd32">
-      <th>Name</th>
-      <th>Classification</th>
-    </tr>
-    <xsl:apply-templates select="pokemon[@generation='1']" />
-  </table>
-  </body>
-  </html>
+
+  <xsl:template match="/pokedex">
+    <html>
+    <body>
+      <h2>Strong Attackers</h2>
+      <table border="1">
+        <tr bgcolor="#9acd32">
+          <th>Name</th>
+          <th>Attack</th>
+        </tr>
+        <xsl:apply-templates select="pokemon[attack &gt; 150]" mode="attack" />
+      </table>
+      
+      <h2>Strong Defenders</h2>
+      <table border="1">
+        <tr bgcolor="#9acd32">
+          <th>Name</th>
+          <th>Defense</th>
+        </tr>
+        <xsl:apply-templates select="pokemon[defense &gt; 150]" mode="defense" />
+      </table>
+      
+      <h2>Fast Pokemon</h2>
+      <table border="1">
+        <tr bgcolor="#9acd32">
+          <th>Name</th>
+          <th>Speed</th>
+        </tr>
+        <xsl:apply-templates select="pokemon[speed &gt; 150]" mode="speed"/>
+      </table>
+    </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="pokemon" mode="attack">
+  <tr>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="attack" /></td>
+  </tr>
 </xsl:template>
 
-<xsl:template match="pokemon">
-    <tr>
-      <td><xsl:value-of select="./name" />(<xsl:value-of select="@pokedexNumber" />)</td>
-      <td><xsl:value-of select="./@classification" /></td>
-    </tr>
+<xsl:template match="pokemon" mode="defense">
+  <tr>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="defense" /></td>
+  </tr>
 </xsl:template>
--->
+
+<xsl:template match="pokemon" mode="speed">
+  <tr>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="speed" /></td>
+  </tr>
+</xsl:template>
+
+
 
 </xsl:stylesheet>

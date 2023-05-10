@@ -55,14 +55,10 @@ for i in range(1, len(sys.argv)):
     weight = float(root.find('weight/kg').text)
     abilities = [elem.text for elem in root.findall('abilities/ability')]
 
-    # Insert Pokemon classification into the classification table
-    cursor.execute("INSERT INTO classification (classification) VALUES (?)", (classification,))
-    classification_id = cursor.lastrowid
-
     # Insert Pokemon data into the pokemon table
     cursor.execute(
-        "INSERT INTO pokemon (generation, pokedex_number, classification_id, name, hp, attack, defense, speed, sp_attack, sp_defense, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        (generation, pokedex_number, classification_id, name, hp, attack, defense, speed, sp_attack, sp_defense, height,
+        "INSERT INTO pokemon (generation, pokedex_number, classification, name, hp, attack, defense, speed, sp_attack, sp_defense, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (generation, pokedex_number, classification, name, hp, attack, defense, speed, sp_attack, sp_defense, height,
          weight))
     pokemon_id = cursor.lastrowid
 

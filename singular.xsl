@@ -9,22 +9,6 @@
 </xsl:template>
 
 <!--
-  These rules will generate text output rather than text; these are useful for more easily
-  figuring out if you got the "select" queries correct. Once you have that figured out,
-  then update the HTML version of these rules below (and comment these out!) to see a nicely-
-  formatted HTML file.
-  -->
-<!-- <xsl:template match="/pokedex">
-Single type pokemon: <xsl:value-of select="" />:
-
-<xsl:apply-templates select="" />
-</xsl:template>
-
-<xsl:template match="pokemon">
-    <xsl:value-of select="./name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:value-of select="./@classification" /> | <xsl:value-of select="./type" /> |
-</xsl:template> -->
-
-<!--
   These rules will generate HTML output rather than text. This is to demonstrate
   the power of using XSLT to create pretty output from XML sources.
 -->
@@ -33,14 +17,14 @@ Single type pokemon: <xsl:value-of select="" />:
     <html>
     <body>
     <h2>Single-type Pokemon</h2>
-    Count: <xsl:value-of select="count(pokemon[type and not(type/following-sibling::type)])" />
+    Count: <xsl:value-of select="count(pokemon[count(type) = 1])" />
     <table border="1">
       <tr bgcolor="#9acd32">
         <th>Name</th>
         <th>Classification</th>
         <th>Type</th>
       </tr>
-      <xsl:apply-templates select="pokemon[type and not(type/following-sibling::type)]" />
+      <xsl:apply-templates select="pokemon[count(type) = 1]" />
     </table>
     </body>
     </html>

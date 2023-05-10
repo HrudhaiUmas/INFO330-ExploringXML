@@ -68,21 +68,21 @@
 
   <xsl:template match="pokemon" mode="attack">
   <tr>
-    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber"/>)</td>
     <td><xsl:value-of select="attack" /></td>
   </tr>
 </xsl:template>
 
 <xsl:template match="pokemon" mode="defense">
   <tr>
-    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber"/>)</td>
     <td><xsl:value-of select="defense" /></td>
   </tr>
 </xsl:template>
 
 <xsl:template match="pokemon" mode="speed">
   <tr>
-    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber" />)</td>
+    <td><xsl:value-of select="name" />(<xsl:value-of select="@pokedexNumber"/>)</td>
     <td><xsl:value-of select="speed" /></td>
   </tr>
 </xsl:template>

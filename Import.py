@@ -72,5 +72,3 @@ for i in range(1, len(sys.argv)):
 conn.commit()
 conn.close()
 
-print("Pokemon data imported successfully.")
-

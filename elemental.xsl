@@ -12,23 +12,6 @@
 </xsl:template>
 
 <!--
-  These rules will generate text output rather than text; these are useful for more easily
-  figuring out if you got the "select" queries correct. Once you have that figured out,
-  then update the HTML version of these rules below (and comment these out!) to see a nicely-
-  formatted HTML file.
-  -->
-<!--
-<xsl:template match="/pokedex">
-    <xsl:apply-templates select="" />
-</xsl:template>
-
-<xsl:template match="pokemon">
-    <xsl:value-of select="" /> (<xsl:value-of select="" />): <xsl:apply-templates select="type" /><xsl:text>
-</xsl:text>
-</xsl:template>
--->
-
-<!--
   These rules will generate HTML output rather than text. This is to demonstrate
   the power of using XSLT to create pretty output from XML sources.
   -->

@@ -1,7 +1,3 @@
-import sqlite3
-import sys
-import xml.etree.ElementTree as ET
-
 # Incoming Pokemon MUST be in this format
 #
 # <pokemon pokedex="" classification="" generation="">
@@ -20,6 +16,10 @@ import xml.etree.ElementTree as ET
 #         <ability />
 #     </abilities>
 # </pokemon>
+
+import sqlite3
+import sys
+import xml.etree.ElementTree as ET
 
 # Check if the XML file name is provided
 if len(sys.argv) < 2:
@@ -43,6 +43,7 @@ for i in range(1, len(sys.argv)):
     pokedex_number = root.get('pokedex')
     classification = root.get('classification')
 
+    # Extract basic attributes
     name = root.find('name').text
     hp = int(root.find('hp').text)
     types = [elem.text for elem in root.findall('type')]
@@ -55,20 +56,6 @@ for i in range(1, len(sys.argv)):
     weight = float(root.find('weight/kg').text)
     abilities = [elem.text for elem in root.findall('abilities/ability')]
 
-    # Insert Pokemon data into the pokemon table
-    cursor.execute(
-        "INSERT INTO pokemon (generation, pokedex_number, classification, name, hp, attack, defense, speed, sp_attack, sp_defense, height, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        (generation, pokedex_number, classification, name, hp, attack, defense, speed, sp_attack, sp_defense, height,
-         weight))
-    pokemon_id = cursor.lastrowid
-
-    for t in types:
-        cursor.execute("INSERT INTO pokemon_types (pokemon_id, type) VALUES (?, ?)", (pokemon_id, t))
-
-    for ability in abilities:
-        cursor.execute("INSERT INTO pokemon_abilities (pokemon_id, ability) VALUES (?, ?)", (pokemon_id, ability))
-
-# Commit the changes and close the database connection
+   
 conn.commit()
 conn.close()
-

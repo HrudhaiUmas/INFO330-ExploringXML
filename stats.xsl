@@ -23,7 +23,7 @@
     Fast:
     <xsl:apply-templates select="pokemon[speed > 150]" />
 </xsl:template>
-
+ 
 <xsl:template match="pokemon">
     <xsl:value-of select="./name" /> (<xsl:value-of select="@pokedexNumber" />): <xsl:apply-templates select="type" />
 </xsl:template>

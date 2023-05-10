@@ -29,7 +29,7 @@
     </body>
     </html>
   </xsl:template>
-
+ 
   <xsl:template match="pokemon">
       <tr>
         <td><xsl:value-of select="./name" />(<xsl:value-of select="@pokedexNumber" />)</td>

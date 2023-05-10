@@ -15,7 +15,6 @@
   the power of using XSLT to create pretty output from XML sources.
 -->
 
-
   <xsl:template match="/pokedex">
     <html>
     <body>
